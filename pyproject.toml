@@ -13,7 +13,6 @@ keywords = ["agent", "wiki", "obsidian", "markdown", "knowledge-base", "ai-agent
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.12",
     "Topic :: Text Processing :: Markup :: Markdown",
 ]
