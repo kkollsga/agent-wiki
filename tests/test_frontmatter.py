@@ -1,6 +1,10 @@
 """Tests for frontmatter parsing and serialization."""
 
-from agent_wiki.frontmatter import extract_parent_link, parse_frontmatter, serialize_frontmatter
+from agent_wiki.frontmatter import (
+    extract_parent_link,
+    parse_frontmatter,
+    serialize_frontmatter,
+)
 
 
 def test_parse_topic_frontmatter():
@@ -30,7 +34,7 @@ def test_parse_no_frontmatter():
 
 def test_extract_parent_link():
     assert extract_parent_link({"parent": "[[Sand Injectites]]"}) == "Sand Injectites"
-    assert extract_parent_link({"parent": '[[index]]'}) == "index"
+    assert extract_parent_link({"parent": "[[index]]"}) == "index"
     assert extract_parent_link({}) is None
     assert extract_parent_link({"parent": ""}) is None
 

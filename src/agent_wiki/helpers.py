@@ -97,7 +97,9 @@ def update_index(root: Path, title: str | None = None) -> Path:
     _render(None, 0)
 
     if not children.get(None):
-        lines.append("*No topics yet. Topics will appear here as sources are ingested.*")
+        lines.append(
+            "*No topics yet. Topics will appear here as sources are ingested.*"
+        )
 
     lines.append("")
 
@@ -235,7 +237,11 @@ def _scan_dir(
     # List files
     for f in sorted(dir_path.iterdir()):
         if f.is_dir():
-            if f.name not in ("completed", ".images", ".extracted") and not f.name.startswith("."):
+            if f.name not in (
+                "completed",
+                ".images",
+                ".extracted",
+            ) and not f.name.startswith("."):
                 _scan_dir(f, raw_root, lines, ingested, in_progress)
             continue
 

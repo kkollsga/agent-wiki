@@ -14,25 +14,25 @@ def wiki_root(tmp_path: Path) -> Path:
 
     # index.md
     (tmp_path / "index.md").write_text(
-        '---\ntitle: Test Wiki\ntype: index\n---\n\n# Test Wiki\n\n'
-        '## Topics\n\n- [[Test Topic]]\n  - [[Child Topic]]\n',
+        "---\ntitle: Test Wiki\ntype: index\n---\n\n# Test Wiki\n\n"
+        "## Topics\n\n- [[Test Topic]]\n  - [[Child Topic]]\n",
         encoding="utf-8",
     )
 
     # Hub topic
     (topics / "Test Topic.md").write_text(
         '---\ntitle: Test Topic\nparent: "[[index]]"\ntype: topic\n---\n\n'
-        '*[[index]] > Test Topic*\n\nSome content about the topic (Author, 2020).\n\n'
-        '## See Also\n\n- [[Child Topic]]\n\n'
-        '## Sources\n\n- [[Author 2020 - Test Paper]]\n',
+        "*[[index]] > Test Topic*\n\nSome content about the topic (Author, 2020).\n\n"
+        "## See Also\n\n- [[Child Topic]]\n\n"
+        "## Sources\n\n- [[Author 2020 - Test Paper]]\n",
         encoding="utf-8",
     )
 
     # Child topic
     (topics / "Child Topic.md").write_text(
         '---\ntitle: Child Topic\nparent: "[[Test Topic]]"\ntype: topic\n---\n\n'
-        '*[[index]] > [[Test Topic]] > Child Topic*\n\nChild content.\n\n'
-        '## Sources\n\n- [[Author 2020 - Test Paper]]\n',
+        "*[[index]] > [[Test Topic]] > Child Topic*\n\nChild content.\n\n"
+        "## Sources\n\n- [[Author 2020 - Test Paper]]\n",
         encoding="utf-8",
     )
 
@@ -40,10 +40,10 @@ def wiki_root(tmp_path: Path) -> Path:
     (sources / "Author 2020 - Test Paper.md").write_text(
         '---\ntitle: "Test Paper Title"\nauthors: [Author]\nyear: 2020\n'
         'type: source\nfile: "[[Raw/test.pdf]]"\n---\n\n'
-        '# Test Paper\n\n**Authors:** Author (2020)\n\n'
-        '## Key Contributions\n\n- Finding 1\n\n'
-        '## Topics\n\n- [[Test Topic]] — main topic\n'
-        '- [[Child Topic]] — also relevant\n',
+        "# Test Paper\n\n**Authors:** Author (2020)\n\n"
+        "## Key Contributions\n\n- Finding 1\n\n"
+        "## Topics\n\n- [[Test Topic]] — main topic\n"
+        "- [[Child Topic]] — also relevant\n",
         encoding="utf-8",
     )
 
@@ -56,8 +56,8 @@ def wiki_with_orphan(wiki_root: Path) -> Path:
     topics = wiki_root / "topics" / "Test Topic"
     (topics / "Orphan Page.md").write_text(
         '---\ntitle: Orphan Page\nparent: "[[Test Topic]]"\ntype: topic\n---\n\n'
-        '*[[index]] > [[Test Topic]] > Orphan Page*\n\nNo one links here.\n\n'
-        '## Sources\n\n',
+        "*[[index]] > [[Test Topic]] > Orphan Page*\n\nNo one links here.\n\n"
+        "## Sources\n\n",
         encoding="utf-8",
     )
     return wiki_root

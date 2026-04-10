@@ -377,8 +377,7 @@ def _check_structure(pages: list[PageInfo], root: Path) -> list[LintIssue]:
                         severity=IssueSeverity.WARNING,
                         file=page.path,
                         message=(
-                            f"Folder '{folder.name}' has no hub page "
-                            f"({folder.name}.md)"
+                            f"Folder '{folder.name}' has no hub page ({folder.name}.md)"
                         ),
                     )
                 )

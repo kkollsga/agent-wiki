@@ -21,7 +21,7 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
         return {}, text
 
     yaml_block = m.group(1)
-    body = text[m.end():]
+    body = text[m.end() :]
     meta: dict = {}
 
     for line in yaml_block.split("\n"):
@@ -34,7 +34,7 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
             continue
 
         key = line[:colon_idx].strip()
-        val_raw = line[colon_idx + 1:].strip()
+        val_raw = line[colon_idx + 1 :].strip()
 
         # Parse value
         meta[key] = _parse_value(val_raw)

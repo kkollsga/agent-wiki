@@ -103,7 +103,9 @@ def test_recover_stale(tmp_path):
 
     # Force stale by setting claimed_at to old time
     text = claimed.read_text()
-    text = text.replace("claimed_at:", "claimed_at: 2020-01-01T00:00:00+00:00\nold_claimed_at:")
+    text = text.replace(
+        "claimed_at:", "claimed_at: 2020-01-01T00:00:00+00:00\nold_claimed_at:"
+    )
     claimed.write_text(text)
 
     recovered = recover_stale(processing, backlog, max_age_minutes=1)

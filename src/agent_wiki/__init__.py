@@ -82,7 +82,9 @@ class WikiRoot:
         """Search for a term across all wiki files. Returns {path: count}."""
         results: dict[Path, int] = {}
         for md_file in self.root.rglob("*.md"):
-            if any(part.startswith(".") for part in md_file.relative_to(self.root).parts):
+            if any(
+                part.startswith(".") for part in md_file.relative_to(self.root).parts
+            ):
                 continue
             text = md_file.read_text(encoding="utf-8")
             count = text.lower().count(term.lower())
@@ -166,9 +168,7 @@ class WikiRoot:
             # Convert — images go in img/<stem>/
             img_dir = output_dir / "img" / source_file.stem
             try:
-                converters[ext](
-                    source_file, dest_md, img_dir=img_dir, max_dpi=max_dpi
-                )
+                converters[ext](source_file, dest_md, img_dir=img_dir, max_dpi=max_dpi)
             except Exception as e:
                 print(f"WARN: Failed to convert {rel}: {e}")
                 continue

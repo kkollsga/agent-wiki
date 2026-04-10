@@ -11,7 +11,9 @@ def main(argv: list[str] | None = None) -> int:
         prog="agent-wiki",
         description="Wiki management tools for Obsidian-style markdown wikis",
     )
-    parser.add_argument("--root", type=Path, help="Wiki root directory (required for most commands)")
+    parser.add_argument(
+        "--root", type=Path, help="Wiki root directory (required for most commands)"
+    )
     parser.add_argument(
         "--json", action="store_true", dest="json_output", help="JSON output"
     )
@@ -90,7 +92,9 @@ def main(argv: list[str] | None = None) -> int:
     p_kanban = sub.add_parser("kanban", help="Kanban pipeline operations")
     kanban_sub = p_kanban.add_subparsers(dest="kanban_command", required=True)
 
-    p_kprocess = kanban_sub.add_parser("process", help="Scan, convert, and create task cards")
+    p_kprocess = kanban_sub.add_parser(
+        "process", help="Scan, convert, and create task cards"
+    )
     p_kprocess.add_argument("input_dir", help="Directory to scan (e.g. raw/)")
     p_kprocess.add_argument("--output-dir", help="Converted output directory")
     p_kprocess.add_argument("--completed-dir", default="./completed")
@@ -100,11 +104,15 @@ def main(argv: list[str] | None = None) -> int:
     kanban_sub.add_parser("status", help="Show card counts per column")
 
     p_klist = kanban_sub.add_parser("list", help="List task cards")
-    p_klist.add_argument("--column", choices=["backlog", "processing", "review", "done"])
+    p_klist.add_argument(
+        "--column", choices=["backlog", "processing", "review", "done"]
+    )
     p_klist.add_argument("--agent", help="Filter by agent type")
 
     p_krecover = kanban_sub.add_parser("recover", help="Recover stale processing cards")
-    p_krecover.add_argument("--max-age", type=int, default=30, help="Minutes before stale")
+    p_krecover.add_argument(
+        "--max-age", type=int, default=30, help="Minutes before stale"
+    )
 
     args = parser.parse_args(argv)
 
@@ -138,7 +146,11 @@ def main(argv: list[str] | None = None) -> int:
                 print("No issues found.")
             else:
                 for issue in issues:
-                    rel = issue.file.relative_to(wiki.root) if wiki.root in issue.file.parents else issue.file
+                    rel = (
+                        issue.file.relative_to(wiki.root)
+                        if wiki.root in issue.file.parents
+                        else issue.file
+                    )
                     print(f"[{issue.severity.value}] {issue.kind.value}: {rel}")
                     print(f"  {issue.message}")
                     if issue.suggestion:
@@ -213,7 +225,12 @@ def main(argv: list[str] | None = None) -> int:
     elif args.command == "find-references":
         refs = wiki.find_references(args.term)
         if args.json_output:
-            print(json.dumps({str(k.relative_to(wiki.root)): v for k, v in refs.items()}, indent=2))
+            print(
+                json.dumps(
+                    {str(k.relative_to(wiki.root)): v for k, v in refs.items()},
+                    indent=2,
+                )
+            )
         else:
             if not refs:
                 print(f"No references to '{args.term}' found")

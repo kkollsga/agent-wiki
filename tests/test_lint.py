@@ -28,7 +28,9 @@ def test_detects_dispute_chronology(wiki_root):
     topic_dir = wiki_root / "topics" / "Test Topic"
     page = topic_dir / "Test Topic.md"
     text = page.read_text()
-    text += '\n\n> **Disputed:** Smith (2020) argues X. However, Jones (2010) found Y.\n'
+    text += (
+        "\n\n> **Disputed:** Smith (2020) argues X. However, Jones (2010) found Y.\n"
+    )
     page.write_text(text)
 
     issues = lint(wiki_root)
