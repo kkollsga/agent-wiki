@@ -7,7 +7,7 @@ __version__ = version("agent-wiki")
 import shutil
 from pathlib import Path
 
-from agent_wiki.init_project import init_project
+from agent_wiki.init_project import init_project as init_project
 
 from agent_wiki._types import LintIssue, WikiStats
 from agent_wiki import files as _files

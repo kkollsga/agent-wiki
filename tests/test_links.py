@@ -29,7 +29,7 @@ def test_parse_display_text_link():
 def test_parse_multiple_links():
     links = parse_links("[[A]] and [[B]] and [[C|see C]]")
     assert len(links) == 3
-    targets = [l.target for l in links]
+    targets = [link.target for link in links]
     assert targets == ["A", "B", "C"]
 
 

@@ -8,7 +8,7 @@ def test_move_updates_links(wiki_root):
     old = wiki_root / "topics" / "Test Topic" / "Child Topic.md"
     new = wiki_root / "topics" / "Test Topic" / "Renamed Child.md"
 
-    modified = move(old, new, wiki_root)
+    move(old, new, wiki_root)
 
     # File moved
     assert not old.exists()
@@ -71,7 +71,7 @@ def test_merge(wiki_root):
     topic.write_text(text)
 
     target = sources_dir / "Author 2020 - Test Paper.md"
-    modified = merge(dup, target, wiki_root)
+    merge(dup, target, wiki_root)
 
     # Dup deleted
     assert not dup.exists()

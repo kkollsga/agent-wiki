@@ -127,8 +127,6 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "lint":
         issues = wiki.lint()
         if args.severity:
-            from agent_wiki._types import IssueSeverity
-
             sev_order = {"error": 0, "warning": 1, "info": 2}
             min_sev = sev_order[args.severity]
             issues = [i for i in issues if sev_order[i.severity.value] <= min_sev]
