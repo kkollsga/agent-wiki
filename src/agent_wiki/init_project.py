@@ -407,8 +407,19 @@ If the source page does not have subsections (legacy format), fall back to a pla
 - **Frontmatter:** Include `title`, `description`, `tags`, and `type`.
 - **No hardcoded breadcrumbs.** Quartz generates breadcrumbs from folder structure.
 - **Callouts:** Use Obsidian callout syntax for disputes, caveats, and important notes.
-- **Images:** Use standard markdown `![alt](path)` with a caption line. Paths relative to wiki root.
+- **Images:** Every topic page should include **1-3 relevant figures**. See the Images section below.
 - **Tags:** Choose 3-6 lowercase tags per page.
+
+## Images
+
+**Every topic page should have at least one image.** Articles without figures feel like walls of text. The source pages list available figures in their `## Key Figures` sections.
+
+Insert 1-3 figures where they best illustrate the surrounding text. Use the exact image paths from the source page's Key Figures (`processed/img/...`). Add a descriptive alt text and an italic caption:
+
+```markdown
+![Brief description](processed/img/paper-name/NNNN-NN.png)
+*Caption explaining significance. Source: [[Source Page#Section|Author et al. (Year)]]*
+```
 
 ## Handling Contradictions
 
@@ -566,7 +577,17 @@ You are a wiki reviewer. You operate in two modes depending on what the orchestr
 
 When given specific `topic_files` to review:
 
-### What to check
+### First: run lint
+
+Always start by running the linter to catch mechanical issues:
+
+```bash
+.venv/bin/agent-wiki --root wiki/ lint
+```
+
+Check the output for errors/warnings on the pages you're reviewing.
+
+### Then check
 
 1. **Content quality** — coherent synthesis? Specific data, named examples, mechanistic explanations?
 2. **Citations** — section-referenced (`[[Source#Section|Author (Year)]]`)? Chronologically ordered?
