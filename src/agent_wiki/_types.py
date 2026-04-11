@@ -11,6 +11,7 @@ class PageType(Enum):
     INDEX = "index"
     LOG = "log"
     STATUS = "status"
+    PROCESSED = "processed"
 
 
 class IssueSeverity(Enum):
@@ -29,6 +30,9 @@ class IssueKind(Enum):
     DISPUTE_CHRONOLOGY = "dispute_chronology"
     SPLIT_CANDIDATE = "split_candidate"
     STRUCTURE_MISMATCH = "structure_mismatch"
+    BROKEN_IMAGE = "broken_image"
+    BROKEN_URL = "broken_url"
+    BROKEN_ANCHOR = "broken_anchor"
 
 
 @dataclass(frozen=True)
@@ -76,9 +80,11 @@ class PageInfo:
     file_ref: str | None = None
     outbound_links: list[str] = field(default_factory=list)
     sections: list[str] = field(default_factory=list)
+    headings: list[str] = field(default_factory=list)
     line_count: int = 0
     breadcrumb: str | None = None
     body: str = ""
+    meta: dict = field(default_factory=dict)
 
 
 @dataclass

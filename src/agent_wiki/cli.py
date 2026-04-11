@@ -32,6 +32,11 @@ def main(argv: list[str] | None = None) -> int:
         choices=["error", "warning", "info"],
         help="Filter by minimum severity",
     )
+    p_lint.add_argument(
+        "--check-urls",
+        action="store_true",
+        help="Validate external URLs via HTTP HEAD requests",
+    )
 
     # move
     p_move = sub.add_parser("move", help="Move/rename a file and update all links")
@@ -133,7 +138,7 @@ def main(argv: list[str] | None = None) -> int:
     wiki = WikiRoot(args.root)
 
     if args.command == "lint":
-        issues = wiki.lint()
+        issues = wiki.lint(check_urls=getattr(args, "check_urls", False))
         if args.severity:
             sev_order = {"error": 0, "warning": 1, "info": 2}
             min_sev = sev_order[args.severity]

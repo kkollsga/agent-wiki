@@ -44,9 +44,9 @@ class WikiRoot:
     def _invalidate(self):
         self._name_index = None
 
-    def lint(self) -> list[LintIssue]:
+    def lint(self, *, check_urls: bool = False) -> list[LintIssue]:
         """Run all lint checks. Returns issues sorted by severity."""
-        return _lint.lint(self.root)
+        return _lint.lint(self.root, check_urls=check_urls)
 
     def move(self, old_path: str | Path, new_path: str | Path) -> list[Path]:
         """Move/rename a file and update all references wiki-wide."""
@@ -168,7 +168,10 @@ class WikiRoot:
             # Convert — images go in img/<stem>/
             img_dir = output_dir / "img" / source_file.stem
             try:
-                converters[ext](source_file, dest_md, img_dir=img_dir, max_dpi=max_dpi)
+                converters[ext](
+                    source_file, dest_md,
+                    img_dir=img_dir, base_dir=self.root, max_dpi=max_dpi,
+                )
             except Exception as e:
                 print(f"WARN: Failed to convert {rel}: {e}")
                 continue

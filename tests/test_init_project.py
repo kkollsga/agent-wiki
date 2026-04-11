@@ -25,7 +25,12 @@ def test_init_creates_structure(tmp_path):
     assert (root / ".claude/commands/ingest.md").exists()
     assert (root / ".claude/commands/lint.md").exists()
     assert (root / "CLAUDE.md").exists()
+    assert (root / "SETUP.md").exists()
     assert (root / ".gitignore").exists()
+    # New files from updated init
+    assert (root / "instructions/agents/reviewer.md").exists()
+    assert (root / ".claude/commands/review.md").exists()
+    assert (root / "docs/publishing.md").exists()
 
 
 def test_init_uses_name(tmp_path):
